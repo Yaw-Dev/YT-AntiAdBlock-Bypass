@@ -3,7 +3,7 @@
 // @namespace    https://e-z.bio/yaw
 // @homepage     https://github.com/AWeirDKiD/YT-AntiAdBlock-Bypass
 // @icon         https://www.gstatic.com/youtube/img/branding/favicon/favicon_192x192.png
-// @version      1.5.3
+// @version      1.6
 // @description  A simple method of bypassing YouTube's AdBlock Detection using Enhancer for YouTube's "Remove Ads" button. Does not require the use of any external website like similar tools do. | Now featuring a GUI for easy configuration!
 // @author       Yaw
 // @match        https://www.youtube.com/*
@@ -16,8 +16,10 @@
     'use strict';
 
     var searchInterval = GM_getValue('searchInterval', 800);
+    var animatedTitle = GM_getValue('animatedTitle', true);
     var failCounter = 0;
     var masterSwitch = true;
+    var titleIndex = 0;
 
     function createSettingsMenu() {
         const settingsButton = Object.assign(document.createElement('button'), {
@@ -28,7 +30,7 @@
             position: 'fixed',
             top: '15px',
             left: '200px',
-            background: 'rgba(12, 12, 12, 0.3)',
+            background: 'rgba(12, 12, 12, 0.2)',
             color: '#fff',
             border: '1px solid #FE2020',
             borderRadius: '5px',
@@ -40,20 +42,24 @@
         document.body.appendChild(settingsButton);
 
         const settingsMenuHTML = `
-            <div id="yt-settings-menu" style="display: none; position: fixed; top: 50px; left: 52px; background: rgba(12, 12, 12, 0.7); color: #fff; border: 1px solid #FE2020; border-radius: 10px; padding: 10px; z-index: 10000;">
+            <div id="yt-settings-menu" style="display: none; position: fixed; top: 50px; left: 83px; background: rgba(12, 12, 12, 0.8); color: #fff; border: 1px solid #FE2020; border-radius: 10px; padding: 10px; z-index: 10000;">
             <button id="close-menu" style="position: absolute; top: 8px; right: 10px; background: transparent; color: #DEDDDD; border: none; cursor: pointer; font-size: 15px;">x</button>
-                <h2 style="text-align: center;">Bypasser Settings</h2>
-                <br>
-                <div style="text-align: center; margin-top: 5px; margin-bottom: 0px;">
-                    <label for="search-interval" style="display: inline-block; width: 100px; vertical-align: middle;">Search Interval:</label>
-                    <input type="range" id="search-interval" min="100" max="5000" style="display: inline-block; vertical-align: middle; cursor: pointer;">
-                    <span id="search-interval-value" style="display: inline-block; vertical-align: middle;">800</span>
-                </div>
-                <div style="text-align: center; margin-top: 10px;">
-                    <button id="save-settings" style="background: #555; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">Save Settings</button>
-                    <p style="color: #aaa; display: inline-block; margin-left: 10px;">(Page will refresh)</p>
-                </div>
-                <p style="text-align: center; color: #aaa; margin-top: 10px;">Made by github.com/AWeirDKiD (Yaw)</p>
+            <h2 style="text-align: center;">Bypasser Settings</h2>
+            <br>
+            <div style="text-align: left; margin-top: 5px; margin-bottom: 0px;">
+                <label for="search-interval" style="display: inline-block; width: 70px; vertical-align: middle;">Search Interval:</label>
+                <input type="range" id="search-interval" min="100" max="5000" style="display: inline-block; vertical-align: middle; cursor: pointer;">
+                <span id="search-interval-value" style="display: inline-block; vertical-align: middle; width: 16px; overflow: visible; white-space: nowrap;">800</span>
+            </div>
+            <div style="text-align: left; margin-top: 5px;">
+                <label for="toggle-animated-title" style="display: inline-block; width: 70px; vertical-align: middle;">Animated Title:</label>
+                <input type="checkbox" id="toggle-animated-title" style="display: inline-block; vertical-align: middle;">
+            </div>
+            <div style="text-align: center; margin-top: 10px;">
+                <button id="save-settings" style="background: #555; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">Save Settings</button>
+                <p style="color: #aaa; display: inline-block; margin-left: 10px;">(Page will refresh)</p>
+            </div>
+            <p style="text-align: center; color: #aaa; margin-top: 10px;">Made by github.com/AWeirDKiD (Yaw)</p>
             </div>
         `;
 
@@ -63,10 +69,16 @@
         });
         document.body.appendChild(settingsMenu);
 
+        const toggleAnimatedTitle = document.getElementById('toggle-animated-title');
+        toggleAnimatedTitle.addEventListener('change', () => {
+            animatedTitle = toggleAnimatedTitle.checked;
+        });
+
         settingsButton.addEventListener('click', () => {
             document.getElementById('yt-settings-menu').style.display = 'block';
             document.getElementById('search-interval').value = searchInterval;
             document.getElementById('search-interval-value').textContent = searchInterval;
+            toggleAnimatedTitle.checked = animatedTitle;
         });
 
         document.getElementById('search-interval').addEventListener('input', () => {
@@ -76,13 +88,22 @@
 
         document.getElementById('save-settings').addEventListener('click', () => {
             GM_setValue('searchInterval', searchInterval);
-            location.reload()
+            GM_setValue('animatedTitle', animatedTitle);
+            location.reload();
             document.getElementById('yt-settings-menu').style.display = 'none';
         });
 
         document.getElementById('close-menu').addEventListener('click', () => {
             document.getElementById('yt-settings-menu').style.display = 'none';
         });
+    }
+
+    function switchTabTitle() {
+        var titles = ["Enjoying YouTube with no Ads", "by github.com/AWeirDKiD"];
+        if (animatedTitle) {
+            window.document.title = titles[titleIndex];
+            titleIndex = (titleIndex + 1) % titles.length;
+        }
     }
 
     function removeAds() {
@@ -116,4 +137,5 @@
     }
     createSettingsMenu();
     setInterval(removeAds, searchInterval);
+    setInterval(switchTabTitle, 1000);
 })();
