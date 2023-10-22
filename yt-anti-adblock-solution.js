@@ -96,7 +96,7 @@
                         failCounter = failCounter + 1;
                     }
                     if (failCounter > 10) {
-                        var buttonNotFound = window.confirm("Failed to find the button more than 10 times. Please make sure that Enhancer for YouTube is installed.\n\nPress 'OK' to redirect to the installation page.\nPress 'Cancel' to disable the Bypasser for this session.");
+                        var buttonNotFound = window.confirm("Failed to find the 'Remove Ads' button. Please make sure that Enhancer for YouTube is installed.\n\nPress 'OK' to redirect to the installation page.\nPress 'Cancel' to disable the Bypasser for this session.");
                         if (buttonNotFound) {
                             window.open("https://chrome.google.com/webstore/detail/enhancer-for-youtube/ponfpcnoihfmfllpaingbgckeeldkhle");
                             failCounter = 0;
