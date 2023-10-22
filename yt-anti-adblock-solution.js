@@ -80,7 +80,6 @@
     }
 
     function removeAds() {
-        console.log("test")
         const currentURL = window.location.href;
         if (masterSwitch) {
             if (/https:\/\/www\.youtube\.com\/watch\?.*/.test(currentURL)) {
