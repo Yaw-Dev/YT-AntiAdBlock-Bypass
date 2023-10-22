@@ -3,7 +3,7 @@
 // @namespace    https://e-z.bio/yaw
 // @homepage     https://github.com/AWeirDKiD/YT-AntiAdBlock-Bypass
 // @icon         https://www.gstatic.com/youtube/img/branding/favicon/favicon_192x192.png
-// @version      1.4.3
+// @version      1.5
 // @description  A simple method of bypassing YouTube's AdBlock Detection using Enhancer for YouTube's "Remove Ads" button. Does not require the use of any external website like similar tools do. | Now featuring a GUI for easy configuration!
 // @author       Yaw
 // @match        https://www.youtube.com/*
@@ -23,9 +23,9 @@
         const settingsButton = document.createElement('button');
         settingsButton.textContent = 'Bypasser Settings';
         settingsButton.style.position = 'fixed';
-        settingsButton.style.top = '50px';
-        settingsButton.style.left = '60px';
-        settingsButton.style.background = '#555';
+        settingsButton.style.top = '15px';
+        settingsButton.style.left = '200px';
+        settingsButton.style.background = 'rgba(12, 12, 12, 0.3)';
         settingsButton.style.color = '#fff';
         settingsButton.style.border = '1px solid #FE2020';
         settingsButton.style.borderRadius = '5px';
@@ -35,13 +35,13 @@
         document.body.appendChild(settingsButton);
 
         const settingsMenuHTML = `
-            <div id="yt-settings-menu" style="display: none; position: fixed; top: 50px; left: 55px; background: #333; color: #fff; border: 1px solid #FE2020; border-radius: 10px; padding: 10px; z-index: 10000;">
+            <div id="yt-settings-menu" style="display: none; position: fixed; top: 50px; left: 52px; background: rgba(12, 12, 12, 0.8); color: #fff; border: 1px solid #FE2020; border-radius: 10px; padding: 10px; z-index: 10000;">
             <button id="close-menu" style="position: absolute; top: 8px; right: 10px; background: transparent; color: #DEDDDD; border: none; cursor: pointer; font-size: 15px;">x</button>
                 <h2 style="text-align: center;">Bypasser Settings</h2>
                 <br>
                 <div style="text-align: center; margin-top: 5px; margin-bottom: 0px;">
                     <label for="search-interval" style="display: inline-block; width: 100px; vertical-align: middle;">Search Interval:</label>
-                    <input type="range" id="search-interval" min="100" max="5000" style="display: inline-block; vertical-align: middle;">
+                    <input type="range" id="search-interval" min="100" max="5000" style="display: inline-block; vertical-align: middle; cursor: pointer;">
                     <span id="search-interval-value" style="display: inline-block; vertical-align: middle;">800</span>
                 </div>
                 <div style="text-align: center; margin-top: 10px;">
