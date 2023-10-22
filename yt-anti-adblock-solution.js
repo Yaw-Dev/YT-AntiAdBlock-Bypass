@@ -3,7 +3,7 @@
 // @namespace    https://e-z.bio/yaw
 // @homepage     https://github.com/AWeirDKiD/YT-AntiAdBlock-Bypass
 // @icon         https://www.gstatic.com/youtube/img/branding/favicon/favicon_192x192.png
-// @version      1.5.2
+// @version      1.5.3
 // @description  A simple method of bypassing YouTube's AdBlock Detection using Enhancer for YouTube's "Remove Ads" button. Does not require the use of any external website like similar tools do. | Now featuring a GUI for easy configuration!
 // @author       Yaw
 // @match        https://www.youtube.com/*
@@ -20,18 +20,23 @@
     var masterSwitch = true;
 
     function createSettingsMenu() {
-        const settingsButton = document.createElement('button');
-        settingsButton.textContent = 'Bypasser Settings';
-        settingsButton.style.position = 'fixed';
-        settingsButton.style.top = '15px';
-        settingsButton.style.left = '200px';
-        settingsButton.style.background = 'rgba(12, 12, 12, 0.3)';
-        settingsButton.style.color = '#fff';
-        settingsButton.style.border = '1px solid #FE2020';
-        settingsButton.style.borderRadius = '5px';
-        settingsButton.style.padding = '5px 10px';
-        settingsButton.style.cursor = 'pointer';
-        settingsButton.style.zIndex = '9999';
+        const settingsButton = Object.assign(document.createElement('button'), {
+            textContent: 'Bypasser Settings'
+        });
+
+        Object.assign(settingsButton.style, {
+            position: 'fixed',
+            top: '15px',
+            left: '200px',
+            background: 'rgba(12, 12, 12, 0.3)',
+            color: '#fff',
+            border: '1px solid #FE2020',
+            borderRadius: '5px',
+            padding: '5px 10px',
+            cursor: 'pointer',
+            zIndex: '9999'
+        });
+
         document.body.appendChild(settingsButton);
 
         const settingsMenuHTML = `
@@ -52,9 +57,10 @@
             </div>
         `;
 
-        const settingsMenu = document.createElement('div');
-        settingsMenu.innerHTML = settingsMenuHTML;
-        settingsMenu.style.zIndex = '10000';
+        const settingsMenu = Object.assign(document.createElement('div'), {
+            innerHTML: settingsMenuHTML,
+            style: "z-index: 10000;"
+        });
         document.body.appendChild(settingsMenu);
 
         settingsButton.addEventListener('click', () => {
@@ -84,7 +90,7 @@
         if (masterSwitch) {
             if (/https:\/\/www\.youtube\.com\/watch\?.*/.test(currentURL)) {
                 const button = document.getElementById("efyt-not-interested");
-                const adShowing = [...document.querySelectorAll('.ad-showing')][0];
+                const adShowing = document.querySelector('.ad-showing');
                 if (adShowing) {
                     if (button) {
                         button.click();
