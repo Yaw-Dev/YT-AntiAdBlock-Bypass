@@ -6,7 +6,7 @@ Inspired by *u/GradientGamerXD's* post on
 
 **Now featuring an intuitive and beautiful menu for easy configuration!**
 
-![Imgur](https://i.imgur.com/pnvOzsy.png)
+![Imgur](https://i.imgur.com/o865n9e.png)
 
 ## Simple Instructions:
 1. Add **YouTube Enhancer** to chrome ([link here](https://chrome.google.com/webstore/detail/enhancer-for-youtube/ponfpcnoihfmfllpaingbgckeeldkhle/))
