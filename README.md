@@ -1,4 +1,4 @@
-# YT-AntiAdBlock-Bypass
+# YouTube Anti AdBlock Bypass via Enhancer for YouTube™
 A very simple way of blocking YouTube ads without the new Anti AdBlock system detecting it. Powered by [YouTube Enhancer](https://chrome.google.com/webstore/detail/enhancer-for-youtube/ponfpcnoihfmfllpaingbgckeeldkhle/)
 
 Inspired by *u/GradientGamerXD's* post on
