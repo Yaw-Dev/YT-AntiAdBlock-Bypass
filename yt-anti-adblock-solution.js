@@ -17,6 +17,7 @@
 
     var searchInterval = GM_getValue('searchInterval', 800);
     var animatedTitle = GM_getValue('animatedTitle', true);
+    var menuAccentColor = GM_getValue('menuAccentColor', '#FE2020')
     var failCounter = 0;
     var masterSwitch = true;
     var titleIndex = 0;
@@ -32,7 +33,8 @@
             left: '200px',
             background: 'rgba(12, 12, 12, 0.2)',
             color: '#fff',
-            border: '1px solid #FE2020',
+            border: '1px solid',
+            borderColor: menuAccentColor,
             borderRadius: '5px',
             padding: '5px 10px',
             cursor: 'pointer',
@@ -56,32 +58,57 @@
         toggleSettingsButton();
 
         const settingsMenuHTML = `
-            <div id="yt-settings-menu" style="display: none; position: fixed; top: 50px; left: 83px; background: rgba(12, 12, 12, 0.8); color: #fff; border: 1px solid #FE2020; border-radius: 10px; padding: 10px; z-index: 10000;">
-            <button id="close-menu" style="position: absolute; top: 8px; right: 10px; background: transparent; color: #DEDDDD; border: none; cursor: pointer; font-size: 15px;">x</button>
-            <h2 style="text-align: center;">Bypasser Settings</h2>
-            <br>
-            <div style="text-align: left; margin-top: 5px; margin-bottom: 0px;">
-                <label for="search-interval" style="display: inline-block; width: 70px; vertical-align: middle;">Search Interval:</label>
-                <input type="range" id="search-interval" min="100" max="5000" style="display: inline-block; vertical-align: middle; cursor: pointer;">
-                <span id="search-interval-value" style="display: inline-block; vertical-align: middle; width: 16px; overflow: visible; white-space: nowrap;">800</span>
-            </div>
-            <div style="text-align: left; margin-top: 5px;">
-                <label for="toggle-animated-title" style="display: inline-block; width: 70px; vertical-align: middle;">Animated Title:</label>
-                <input type="checkbox" id="toggle-animated-title" style="display: inline-block; vertical-align: middle;">
-            </div>
-            <div style="text-align: center; margin-top: 10px;">
-                <button id="save-settings" style="background: #555; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">Save Settings</button>
-                <p style="color: #aaa; display: inline-block; margin-left: 10px;">(Page will refresh)</p>
-            </div>
-            <p style="text-align: center; color: #aaa; margin-top: 10px;">Made by github.com/Yaw-Dev (Yaw)</p>
-            </div>
-        `;
+            <div id="yt-settings-menu" style="display: none; position: fixed; top: 50px; left: 83px; background: rgba(12, 12, 12, 0.8); color: #fff; border: 1px solid ${menuAccentColor}; border-radius: 10px; padding: 10px; z-index: 10000;">
+                <button id="close-menu" style="position: absolute; top: 8px; right: 10px; background: transparent; color: #DEDDDD; border: none; cursor: pointer; font-size: 15px;">x</button>
+                <h2 style="text-align: center;">Bypasser Settings</h2>
+                <br>
+                <div style="text-align: left; margin-top: 5px;">
+                    <label for="search-interval" style="display: inline-block; width: 70px; vertical-align: middle;">Search Interval:</label>
+                    <input type="range" id="search-interval" min="100" max="5000" style="display: inline-block; vertical-align: middle; cursor: pointer;">
+                    <span id="search-interval-value" style="display: inline-block; vertical-align: middle; width: 16px; overflow: visible; white-space: nowrap;">800</span>
+                </div>
+                <div style="text-align: left; margin-top: 5px;">
+                    <label for="toggle-animated-title" style="display: inline-block; width: 70px; vertical-align: middle;">Animated Title:</label>
+                    <input type="checkbox" id="toggle-animated-title" style="display: inline-block; vertical-align: middle;">
+                </div>
+                <div style="text-align: left; margin-top: 5px;">
+                    <label for="menuAccentColor" style="display: inline-block; width: 70px; vertical-align: middle;">Accent Color:</label>
+                    <input type="color" id="accent-color" style="display: inline-block; vertical-align: middle;" value="${menuAccentColor}">
+                    <button id="reset-color" style="display: inline-block; vertical-align: middle; background: transparent; border: none; cursor: pointer; font-size: 15px; color: white;">↺</button>
+                </div>
+                <div style="text-align: center; margin-top: 12px;">
+                    <button id="save-settings" style="background: #555; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">Save Settings</button>
+                    <p style="color: #aaa; display: inline-block; margin-left: 10px;">(Page will refresh)</p>
+                </div>
+                <p style="text-align: center; color: #aaa; margin-top: 10px;">Made by github.com/Yaw-Dev (Yaw)</p>
+                </div>
+            `;
 
         const settingsMenu = Object.assign(document.createElement('div'), {
             innerHTML: settingsMenuHTML,
             style: "z-index: 10000;"
         });
         document.body.appendChild(settingsMenu);
+
+        const colorPicker = document.getElementById('accent-color');
+        function updateAccentColorStyle() {
+            const settingsMenu = document.getElementById('yt-settings-menu');
+            settingsMenu.style.borderColor = menuAccentColor;
+            settingsButton.style.borderColor = menuAccentColor;
+            colorPicker.value = menuAccentColor;
+        }
+
+        const resetColorButton = document.getElementById('reset-color');
+
+        colorPicker.addEventListener('input', () => {
+            menuAccentColor = colorPicker.value;
+            updateAccentColorStyle();
+        });
+
+        resetColorButton.addEventListener('click', () => {
+            menuAccentColor = '#FE2020';
+            updateAccentColorStyle();
+        });
 
         const toggleAnimatedTitle = document.getElementById('toggle-animated-title');
         toggleAnimatedTitle.addEventListener('change', () => {
@@ -100,9 +127,16 @@
             document.getElementById('search-interval-value').textContent = searchInterval;
         });
 
+        document.getElementById('accent-color').addEventListener('input', function() {
+            const newAccentColor = this.value;
+            menuAccentColor = newAccentColor;
+            settingsButton.style.borderColor = menuAccentColor;
+        });
+
         document.getElementById('save-settings').addEventListener('click', () => {
             GM_setValue('searchInterval', searchInterval);
             GM_setValue('animatedTitle', animatedTitle);
+            GM_setValue('menuAccentColor', menuAccentColor); // Save the menu accent color
             location.reload();
             document.getElementById('yt-settings-menu').style.display = 'none';
         });
