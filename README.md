@@ -18,7 +18,7 @@ Inspired by *u/GradientGamerXD's* post on
 Note: This script will not completely remove all ads from YouTube but will rather auto skip them almost instantly!
 
 ### Pages:
-[GitHub Repo](https://github.com/AWeirDKiD/YT-AntiAdBlock-Bypass/) | [GreasyFork](https://greasyfork.org/en/scripts/477864-youtube-anti-adblock-bypass-via-youtube-enhancer/)
+[GitHub Repo](https://github.com/Yaw-Dev/YT-AntiAdBlock-Bypass/) | [GreasyFork](https://greasyfork.org/en/scripts/477864-youtube-anti-adblock-bypass-via-youtube-enhancer/)
 
 ### Socials:
-[Github](https://github.com/AWeirDKiD) | [e-z.bio](https://e-z.bio/yaw) | [Twitter](https://twitter.com/JuicyYaw) | [Discord](https://discord.com/users/1163799526507819009) | [Discord Server](https://discord.gg/sYZusgbqmh)
+[Github](https://github.com/Yaw-Dev) | [e-z.bio](https://e-z.bio/yaw) | [Twitter](https://twitter.com/JuicyYaw) | [Discord](https://discord.com/users/1163799526507819009) | [Discord Server](https://discord.gg/sYZusgbqmh)
