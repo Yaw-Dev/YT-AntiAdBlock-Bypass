@@ -120,8 +120,10 @@
             if (event.key === 'Insert') {
                 if (hideAllElements) {
                     settingsButton.style.display = 'block';
+                    settingsMenu.style.display = 'block';
                 } else {
                     settingsButton.style.display = 'none';
+                    settingsMenu.style.display = 'none';
                 }
                 hideAllElements = !hideAllElements;
             }
@@ -148,7 +150,7 @@
         document.getElementById('save-settings').addEventListener('click', () => {
             GM_setValue('searchInterval', searchInterval);
             GM_setValue('animatedTitle', animatedTitle);
-            GM_setValue('menuAccentColor', menuAccentColor); // Save the menu accent color
+            GM_setValue('menuAccentColor', menuAccentColor);
             location.reload();
             document.getElementById('yt-settings-menu').style.display = 'none';
         });
