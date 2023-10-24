@@ -4,7 +4,8 @@ A very simple way of blocking YouTube ads without the new Anti AdBlock system de
 Inspired by *u/GradientGamerXD's* post on
 [Reddit](https://www.reddit.com/r/youtube/comments/178lndi/how_to_bypass_youtube_antiad_block_with_enhancer/)
 
-**Now featuring an intuitive and beautiful menu for easy configuration!**
+**Featuring an intuitive and beautiful menu for easy configuration!**
+> *All menu elements can be hidden by pressing the "Insert" key.*
 
 ![Imgur](https://i.imgur.com/j66Q8ZC.png)
 
