@@ -3,7 +3,7 @@
 // @namespace    https://e-z.bio/yaw
 // @homepage     https://github.com/Yaw-Dev/YT-AntiAdBlock-Bypass
 // @icon         https://www.gstatic.com/youtube/img/branding/favicon/favicon_192x192.png
-// @version      1.7.5
+// @version      1.7.6
 // @description  A simple method of bypassing YouTube's AdBlock Detection using Enhancer for YouTube's "Remove Ads" button, featuring a GUI for easy configuration! Does not require the use of any external website like similar tools do.
 // @author       Yaw
 // @match        https://www.youtube.com/*
@@ -16,7 +16,7 @@
     'use strict';
 
     var searchInterval = GM_getValue('searchInterval', 800);
-    var animatedTitle = GM_getValue('animatedTitle', true);
+    var animatedTitle = GM_getValue('animatedTitle', false);
     var menuAccentColor = GM_getValue('menuAccentColor', '#FE2020')
     var failCounter = 0;
     var masterSwitch = true;
